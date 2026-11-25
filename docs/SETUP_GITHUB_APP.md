@@ -3,6 +3,30 @@
 You need two things before running GitPulse: a GitHub App (for webhooks and API access) and
 a Discord application with a bot user. This takes about 10 minutes.
 
+## Quick way: create the app from the manifest
+
+From the repository folder:
+
+```sh
+python scripts/create_github_app.py
+```
+
+Your browser opens GitHub with the name, permissions, events and webhook URL already filled
+in. Pick a name if `GitPulse` is taken, click **Create GitHub App**, and you're sent back to
+the script, which saves `private-key.pem` and writes `GITHUB_APP_ID` and
+`GITHUB_WEBHOOK_SECRET` to `.env`. Options:
+
+| Option | Use |
+| --- | --- |
+| `--name "GitPulse Dev"` | Another name, for a second app used in development |
+| `--webhook-url https://smee.io/xyz` | Another webhook URL, for local testing |
+| `--private` | Only installable on your own account |
+| `--org my-org` | Create it under an organization |
+
+Then skip to [step 3](#3-app-id-and-private-key) to upload a logo (`docs/marketplace/logo.png`), and
+[step 4](#4-install-the-app-on-your-repositories) to install it. The rest of this section
+does the same thing by hand.
+
 ## 1. Webhook secret
 
 Generate a random secret first, you'll paste it in the GitHub App and in `.env`:
@@ -22,7 +46,7 @@ Go to **GitHub → Settings → Developer settings → GitHub Apps → New GitHu
 | --- | --- |
 | GitHub App name | `GitPulse`. Names are unique across GitHub, so if it's taken pick something like `GitPulse Discord` |
 | Description | `Posts releases, pushes, issues and pull requests to Discord.` |
-| Homepage URL | `https://github.com/saiyii/gitpulse` |
+| Homepage URL | `https://gitpulse.saiyiidev.com` |
 
 ### Identifying and authorizing users
 
@@ -84,6 +108,9 @@ On the app's **General** page:
 
 The key gives full access to the app. Don't commit it (`*.pem` is already in `.gitignore`),
 don't paste it in Discord, and if it leaks, delete it from this page and generate a new one.
+
+Under **Display information**, upload `docs/marketplace/logo.png` as the app's logo (and use the same
+image as the Discord bot's avatar).
 
 ## 4. Install the app on your repositories
 

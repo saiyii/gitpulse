@@ -2,7 +2,9 @@
 
 This is how GitPulse runs in production: a Pterodactyl server using a generic Python egg,
 with Nginx on the host terminating HTTPS for `gitpulse.saiyiidev.com` and forwarding
-`/webhook` to the port Pterodactyl gives the server.
+everything to the port Pterodactyl gives the server. The bot serves the webhook endpoint
+(`/webhook`), the health check (`/health`) and the small website (`/`, `/privacy`, `/terms`,
+`/install`, `/invite`) on that same port.
 
 ```
 GitHub ──HTTPS──▶ gitpulse.saiyiidev.com (Nginx :443) ──▶ 127.0.0.1:<port> (Pterodactyl container)
@@ -123,21 +125,13 @@ GitHub talks to your VPS directly.
        server_name gitpulse.saiyiidev.com;
        client_max_body_size 25m;
 
-       location = /webhook {
+       location / {
            proxy_pass http://127.0.0.1:25570;
            proxy_set_header Host $host;
            proxy_set_header X-Real-IP $remote_addr;
            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
            proxy_set_header X-Forwarded-Proto $scheme;
            proxy_read_timeout 15s;
-       }
-
-       location = /health {
-           proxy_pass http://127.0.0.1:25570;
-       }
-
-       location / {
-           return 404;
        }
    }
    ```
@@ -176,7 +170,7 @@ server {
     # GitHub payloads can be up to 25 MB
     client_max_body_size 25m;
 
-    location = /webhook {
+    location / {
         proxy_pass http://127.0.0.1:25570;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -184,14 +178,6 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         # GitHub waits 10 seconds at most, GitPulse answers right away
         proxy_read_timeout 15s;
-    }
-
-    location = /health {
-        proxy_pass http://127.0.0.1:25570;
-    }
-
-    location / {
-        return 404;
     }
 }
 ```
@@ -211,6 +197,9 @@ sudo nginx -t && sudo systemctl reload nginx
 curl https://gitpulse.saiyiidev.com/health
 # OK
 ```
+
+`https://gitpulse.saiyiidev.com` should show the landing page, and its two buttons should
+lead to the GitHub App install page and the Discord invite.
 
 Then in the GitHub App settings, **Advanced → Recent Deliveries**, redeliver the `ping`.
 It should come back `200` with `pong`. Publish a release on a subscribed repo and it shows

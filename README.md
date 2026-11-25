@@ -1,3 +1,5 @@
+<img src="docs/marketplace/logo.png" alt="" width="64" align="right">
+
 # GitPulse
 
 [![tests](https://github.com/saiyii/gitpulse/actions/workflows/tests.yml/badge.svg)](https://github.com/saiyii/gitpulse/actions/workflows/tests.yml)
@@ -11,6 +13,14 @@ leaving your server.
 
 I wrote it because I wanted release announcements for my own projects in my Discord servers,
 without handing a webhook URL with full channel access to every repo, and without polling.
+
+**[Install the GitHub App](https://gitpulse.saiyiidev.com/install)** ·
+**[Add to Discord](https://gitpulse.saiyiidev.com/invite)** ·
+[Website](https://gitpulse.saiyiidev.com) ·
+[Privacy](https://gitpulse.saiyiidev.com/privacy)
+
+Then run `/subscribe owner/name` in the channel where updates should go. Or host your own
+copy, see [Self-hosting](#self-hosting).
 
 ## Features
 
@@ -72,6 +82,8 @@ that's not the case yet and gives you the install link.
 You need Python 3.11 or newer, a Discord bot and a GitHub App.
 
 1. Create the GitHub App and the Discord bot: [docs/SETUP_GITHUB_APP.md](docs/SETUP_GITHUB_APP.md).
+   Once the repo is cloned, `python scripts/create_github_app.py` creates the app with all
+   the right settings in one click.
 2. Clone and install:
 
    ```sh
@@ -93,7 +105,13 @@ You need Python 3.11 or newer, a Discord bot and a GitHub App.
 5. Point the GitHub App's webhook URL at `https://your-domain/webhook`. For a real server
    behind Nginx (or on Pterodactyl), see [docs/DEPLOY_PTERODACTYL.md](docs/DEPLOY_PTERODACTYL.md).
 
-`GET /health` returns `200 OK` once the webhook server is up.
+`GET /health` returns `200 OK` once the webhook server is up. The same port also serves a
+small website: a landing page at `/`, the privacy policy and terms at `/privacy` and
+`/terms`, and `/install` and `/invite`, which redirect to your app's install page and your
+bot's invite link. Edit the files in `gitpulse/web/` if you run your own instance.
+
+Listing your own instance on GitHub Marketplace is covered in
+[docs/MARKETPLACE.md](docs/MARKETPLACE.md).
 
 ### Testing webhooks locally
 
