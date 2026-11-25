@@ -19,6 +19,7 @@ from .github.auth import GitHubAppAuth
 from .github.client import GitHubClient, GitHubError, NotFound, NotInstalled, RateLimited
 from .github.webhooks import WebhookServer
 from .utils import UserError
+from .website import add_site_routes
 
 log = logging.getLogger(__name__)
 
@@ -64,6 +65,11 @@ class GitPulse(commands.Bot):
             self.handle_github_event,
             config.webhook_host,
             config.webhook_port,
+        )
+        add_site_routes(
+            self.webhooks.app,
+            install_url=lambda: self.install_url,
+            invite_url=lambda: self.invite_url,
         )
         self.github_app: dict[str, Any] | None = None
 

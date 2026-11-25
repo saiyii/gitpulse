@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy policy - GitPulse</title>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/logo.svg" alt="">GitPulse</a>
+      <nav>
+        <a href="https://github.com/saiyii/gitpulse">Source</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </header>
+
+    <main class="doc">
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: November 25, 2026</p>
+
+      <p>
+        This policy covers the GitPulse instance run at <code>gitpulse.saiyiidev.com</code>: the
+        GitPulse GitHub App and the GitPulse Discord bot. If you run your own copy of GitPulse,
+        you are responsible for the data it handles.
+      </p>
+      <p>Short version: GitPulse stores which repositories each Discord channel follows, and nothing else. No accounts, no tracking, no ads, nothing is sold.</p>
+
+      <h2>What is stored</h2>
+      <p>For each subscription created with <code>/subscribe</code>:</p>
+      <ul>
+        <li>the Discord server ID and channel ID,</li>
+        <li>the repository name (for example <code>saiyii/gitpulse</code>),</li>
+        <li>the event types you chose (releases, push, issues, pulls),</li>
+        <li>the ID of the GitHub App installation covering that repository, if any,</li>
+        <li>the date the subscription was created.</li>
+      </ul>
+      <p>That's the whole database. It does not contain Discord user IDs, messages, GitHub usernames or email addresses.</p>
+
+      <h2>What is processed but not stored</h2>
+      <ul>
+        <li>
+          <strong>GitHub webhooks.</strong> When something happens on a repository where the app is
+          installed, GitHub sends an event (release, push, issue, pull request). GitPulse turns it
+          into a Discord message for the subscribed channels and then discards it. Only the
+          delivery ID is kept in memory for a short time, to avoid posting the same event twice.
+        </li>
+        <li>
+          <strong>Slash commands.</strong> Discord sends the command and who used it. GitPulse uses
+          that to answer and to check permissions (for example the role needed by
+          <code>/issue create</code>).
+        </li>
+        <li>
+          <strong>GitHub API responses</strong> for <code>/repo</code> and <code>/release</code>,
+          used to build the reply.
+        </li>
+      </ul>
+
+      <h2>Issues created from Discord</h2>
+      <p>
+        <code>/issue create</code> opens an issue on GitHub with the title and text you typed,
+        followed by a line saying it was opened from Discord with your Discord username. That
+        issue is public if the repository is public, and is then governed by GitHub's terms and
+        privacy statement. You can edit or delete it on GitHub like any other issue.
+      </p>
+
+      <h2>Logs</h2>
+      <p>
+        The server keeps technical logs (events received, repository names, channel IDs, errors)
+        to keep the service running and to debug problems. They are not shared with anyone and
+        are only kept as long as they are useful for that.
+      </p>
+
+      <h2>Permissions</h2>
+      <p>
+        On GitHub, the app asks for read access to contents, metadata and pull requests, and
+        read/write access to issues. It never touches code. On Discord, the bot asks to view
+        channels, send messages and embed links, and uses no privileged intents: it cannot
+        read message content or the member list.
+      </p>
+
+      <h2>Where the data lives</h2>
+      <p>
+        GitPulse runs on a server rented from OVHcloud. Traffic to
+        <code>gitpulse.saiyiidev.com</code> may pass through Cloudflare. GitHub and Discord
+        process data under their own policies.
+      </p>
+
+      <h2>Deleting your data</h2>
+      <ul>
+        <li><code>/unsubscribe</code> deletes a subscription immediately.</li>
+        <li>Removing the bot from a Discord server deletes all of that server's subscriptions.</li>
+        <li>Deleting a channel deletes its subscriptions.</li>
+        <li>Uninstalling the GitHub App stops all events and removes the stored installation IDs.</li>
+      </ul>
+      <p>You can also email <a href="mailto:support@saiyiidev.com">support@saiyiidev.com</a> to ask what is stored about your server, or to have it deleted.</p>
+
+      <h2>Changes</h2>
+      <p>
+        If this policy changes, the new version will be published on this page with a new date.
+        The history is public in the
+        <a href="https://github.com/saiyii/gitpulse/commits/main/gitpulse/web/privacy.html">GitHub repository</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p><a href="mailto:support@saiyiidev.com">support@saiyiidev.com</a></p>
+    </main>
+
+    <footer>
+      <a href="/">Home</a>
+      <a href="https://github.com/saiyii/gitpulse">GitHub</a>
+      <a href="/terms">Terms</a>
+      <p>Not affiliated with GitHub or Discord.</p>
+    </footer>
+  </div>
+</body>
+</html>

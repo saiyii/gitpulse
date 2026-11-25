@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitPulse: GitHub activity in Discord</title>
+  <meta name="description" content="Discord bot and GitHub App that posts releases, pushes, issues and pull requests from your repositories to Discord channels.">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="/"><img src="/logo.svg" alt="">GitPulse</a>
+      <nav>
+        <a href="https://github.com/saiyii/gitpulse">Source</a>
+        <a href="https://github.com/saiyii/gitpulse#commands">Commands</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <h1>Your GitHub releases, pushes and pull requests, posted to Discord.</h1>
+          <p>
+            GitPulse is a Discord bot paired with a GitHub App. Pick a repository and a channel,
+            and it posts what happens there. You can also look up repos and open issues without
+            leaving Discord.
+          </p>
+          <div class="buttons">
+            <a class="button primary" href="/install">Install the GitHub App</a>
+            <a class="button" href="/invite">Add to Discord</a>
+          </div>
+          <p class="small">Free and open source (MIT). You can also <a href="https://github.com/saiyii/gitpulse#self-hosting">host it yourself</a>.</p>
+        </div>
+
+        <div class="discord" aria-label="Example of a release announcement in Discord">
+          <img class="avatar" src="/logo.svg" alt="">
+          <div>
+            <span class="name">GitPulse</span><span class="tag">APP</span><span class="time">Today at 18:04</span>
+            <div class="embed">
+              <div class="author">saiyii</div>
+              <div class="title">saiyii/gitpulse v1.1.0</div>
+              <ul class="notes">
+                <li>Allow dots in repository names</li>
+                <li>Close code blocks when release notes are cut</li>
+              </ul>
+              <div><a href="#">Read more</a></div>
+              <div class="fields">
+                <div class="field"><b>Tag</b><code>v1.1.0</code></div>
+                <div class="field"><b>Assets (2)</b><a href="#">gitpulse-v1.1.0.zip</a></div>
+              </div>
+              <div class="footer">saiyii/gitpulse • GitHub</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <h2>Set up in three steps</h2>
+        <ol class="steps">
+          <li>
+            <h3>Install the GitHub App</h3>
+            <p>On your account or organization, for all repositories or only the ones you pick.</p>
+          </li>
+          <li>
+            <h3>Add the bot to your server</h3>
+            <p>It only needs to read channels, send messages and embed links.</p>
+          </li>
+          <li>
+            <h3>Subscribe a channel</h3>
+            <p><code>/subscribe owner/repo releases,push</code> in the channel where updates should go.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>What it posts</h2>
+        <table>
+          <tr><td><code>releases</code></td><td>New releases with their notes and download links. On by default.</td></tr>
+          <tr><td><code>push</code></td><td>Commits pushed to the default branch, five at a time with a link to the full diff.</td></tr>
+          <tr><td><code>issues</code></td><td>Issues opened, closed and reopened.</td></tr>
+          <tr><td><code>pulls</code></td><td>Pull requests opened, merged, closed and reopened.</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Commands</h2>
+        <table>
+          <tr><td><code>/repo owner/name</code></td><td>Stars, forks, language, latest release and last push.</td></tr>
+          <tr><td><code>/release owner/name</code></td><td>The latest release.</td></tr>
+          <tr><td><code>/subscribe</code>, <code>/unsubscribe</code></td><td>Choose what the current channel receives. Needs Manage Server.</td></tr>
+          <tr><td><code>/subscriptions</code></td><td>Everything the server follows.</td></tr>
+          <tr><td><code>/issue create</code></td><td>Open an issue on GitHub. Limited to a role you choose.</td></tr>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <a href="https://github.com/saiyii/gitpulse">GitHub</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:support@saiyiidev.com">support@saiyiidev.com</a>
+      <p>Made by <a href="https://github.com/saiyii">saiyii</a>. Not affiliated with GitHub or Discord.</p>
+    </footer>
+  </div>
+</body>
+</html>
