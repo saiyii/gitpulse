@@ -1,8 +1,8 @@
 {
   "action": "published",
   "release": {
-    "url": "https://api.github.com/repos/saiyii/nuclear-resource/releases/180012345",
-    "html_url": "https://github.com/saiyii/nuclear-resource/releases/tag/v2.3.0",
+    "url": "https://api.github.com/repos/saiyii/gitpulse/releases/180012345",
+    "html_url": "https://github.com/saiyii/gitpulse/releases/tag/v1.1.0",
     "id": 180012345,
     "author": {
       "login": "saiyii",
@@ -11,37 +11,37 @@
       "html_url": "https://github.com/saiyii",
       "type": "User"
     },
-    "tag_name": "v2.3.0",
+    "tag_name": "v1.1.0",
     "target_commitish": "main",
-    "name": "v2.3.0",
+    "name": "v1.1.0",
     "draft": false,
     "prerelease": false,
     "created_at": "2026-11-20T17:02:11Z",
     "published_at": "2026-11-20T17:04:39Z",
     "assets": [
       {
-        "name": "nuclear-resource-v2.3.0.zip",
-        "size": 1843211,
+        "name": "gitpulse-v1.1.0.zip",
+        "size": 48213,
         "download_count": 0,
-        "browser_download_url": "https://github.com/saiyii/nuclear-resource/releases/download/v2.3.0/nuclear-resource-v2.3.0.zip"
+        "browser_download_url": "https://github.com/saiyii/gitpulse/releases/download/v1.1.0/gitpulse-v1.1.0.zip"
       },
       {
         "name": "checksums.txt",
         "size": 142,
         "download_count": 0,
-        "browser_download_url": "https://github.com/saiyii/nuclear-resource/releases/download/v2.3.0/checksums.txt"
+        "browser_download_url": "https://github.com/saiyii/gitpulse/releases/download/v1.1.0/checksums.txt"
       }
     ],
-    "tarball_url": "https://api.github.com/repos/saiyii/nuclear-resource/tarball/v2.3.0",
-    "zipball_url": "https://api.github.com/repos/saiyii/nuclear-resource/zipball/v2.3.0",
-    "body": "<!-- Release notes generated using configuration in .github/release.yml -->\r\n\r\n## What's Changed\r\n\r\n### Fixes\r\n* Fix false positive on vehicle spawn by @saiyii in https://github.com/saiyii/nuclear-resource/pull/41\r\n* Handle players disconnecting during a scan by @saiyii in https://github.com/saiyii/nuclear-resource/pull/43\r\n\r\n### Other\r\n* Bump config version to 5\r\n\r\n**Full Changelog**: https://github.com/saiyii/nuclear-resource/compare/v2.2.1...v2.3.0"
+    "tarball_url": "https://api.github.com/repos/saiyii/gitpulse/tarball/v1.1.0",
+    "zipball_url": "https://api.github.com/repos/saiyii/gitpulse/zipball/v1.1.0",
+    "body": "<!-- Release notes generated using configuration in .github/release.yml -->\r\n\r\n## What's Changed\r\n\r\n### Fixes\r\n* Allow dots in repository names by @octocat in https://github.com/saiyii/gitpulse/pull/14\r\n* Close code blocks when release notes are cut by @saiyii in https://github.com/saiyii/gitpulse/pull/16\r\n\r\n### Other\r\n* Bump aiohttp\r\n\r\n**Full Changelog**: https://github.com/saiyii/gitpulse/compare/v1.0.0...v1.1.0"
   },
   "repository": {
-    "id": 812345678,
-    "name": "nuclear-resource",
-    "full_name": "saiyii/nuclear-resource",
+    "id": 900000001,
+    "name": "gitpulse",
+    "full_name": "saiyii/gitpulse",
     "private": false,
-    "html_url": "https://github.com/saiyii/nuclear-resource",
+    "html_url": "https://github.com/saiyii/gitpulse",
     "default_branch": "main"
   },
   "sender": {

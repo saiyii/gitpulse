@@ -8,7 +8,7 @@ from gitpulse.utils import UserError, parse_events, parse_repo
     [
         ("saiyii/gitpulse", "saiyii/gitpulse"),
         ("  saiyii/gitpulse ", "saiyii/gitpulse"),
-        ("saiyii/nuclear.site", "saiyii/nuclear.site"),
+        ("octocat/octocat.github.io", "octocat/octocat.github.io"),
         ("https://github.com/saiyii/gitpulse", "saiyii/gitpulse"),
         ("github.com/saiyii/gitpulse/", "saiyii/gitpulse"),
         ("https://github.com/saiyii/gitpulse.git", "saiyii/gitpulse"),

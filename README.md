@@ -97,15 +97,19 @@ You need Python 3.11 or newer, a Discord bot and a GitHub App.
 
 ### Testing webhooks locally
 
-Send one of the recorded payloads to your local instance, signed with your secret:
+The payloads in `tests/fixtures/` are sample events for `saiyii/gitpulse`. To see one in
+Discord, run `/subscribe saiyii/gitpulse all` in a test channel, then send it to your local
+instance, signed with your secret:
 
 ```sh
 python scripts/send_test_event.py release tests/fixtures/release_published.json
 ```
 
-Subscribe a channel to `saiyii/nuclear-resource` first if you want to see it show up in
-Discord. To receive real events on your machine, create a channel on [smee.io](https://smee.io),
-use its URL as the app's webhook URL, and forward it:
+The bot only posts in channels subscribed to the repository named in the payload, so
+without that subscription you'll get `202 accepted` and nothing in Discord.
+
+To receive real events from GitHub on your machine instead, create a channel on
+[smee.io](https://smee.io), use its URL as the app's webhook URL, and forward it:
 
 ```sh
 npx smee-client --url https://smee.io/<your-channel> --target http://127.0.0.1:8080/webhook

@@ -58,15 +58,15 @@ def load(name: str) -> dict:
 
 
 async def test_release_goes_to_subscribed_channels(bot):
-    await bot.db.subscribe(1, 10, "saiyii/nuclear-resource", frozenset({"releases"}), None)
-    await bot.db.subscribe(1, 11, "saiyii/nuclear-resource", frozenset({"push"}), None)
+    await bot.db.subscribe(1, 10, "saiyii/gitpulse", frozenset({"releases"}), None)
+    await bot.db.subscribe(1, 11, "saiyii/gitpulse", frozenset({"push"}), None)
     await bot.db.subscribe(1, 12, "saiyii/other", frozenset({"releases"}), None)
 
     await bot.handle_github_event("release", load("release_published"))
 
-    assert bot.posted == [(10, "saiyii/nuclear-resource v2.3.0")]
+    assert bot.posted == [(10, "saiyii/gitpulse v1.1.0")]
     # installation id from the payload is remembered
-    assert bot.github.installations == {"saiyii/nuclear-resource": 51234567}
+    assert bot.github.installations == {"saiyii/gitpulse": 51234567}
     [sub, *_] = await bot.db.guild_subscriptions(1)
     assert sub.installation_id == 51234567
 

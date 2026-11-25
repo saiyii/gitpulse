@@ -73,17 +73,17 @@ def test_excerpt_closes_code_fence():
 
 def test_release_embed():
     embed = build_embed("release", load("release_published"))
-    assert embed.title == "saiyii/nuclear-resource v2.3.0"
-    assert embed.url == "https://github.com/saiyii/nuclear-resource/releases/tag/v2.3.0"
+    assert embed.title == "saiyii/gitpulse v1.1.0"
+    assert embed.url == "https://github.com/saiyii/gitpulse/releases/tag/v1.1.0"
     assert embed.color.value == Color.RELEASE
     assert embed.author.name == "saiyii"
     assert "<!--" not in embed.description
-    assert "Fix false positive on vehicle spawn" in embed.description
+    assert "Allow dots in repository names" in embed.description
 
     fields = {f.name: f.value for f in embed.fields}
-    assert fields["Tag"] == "`v2.3.0`"
-    assert "nuclear-resource-v2.3.0.zip" in fields["Assets (2)"]
-    assert "1.8 MB" in fields["Assets (2)"]
+    assert fields["Tag"] == "`v1.1.0`"
+    assert "gitpulse-v1.1.0.zip" in fields["Assets (2)"]
+    assert "47.1 KB" in fields["Assets (2)"]
 
 
 def test_release_long_notes_get_read_more_link():
@@ -99,7 +99,7 @@ def test_release_many_assets():
     release = load("release_published")["release"]
     asset = release["assets"][0]
     release["assets"] = [dict(asset, name=f"build-{i}.zip") for i in range(30)]
-    embed = release_embed("saiyii/nuclear-resource", release)
+    embed = release_embed("saiyii/gitpulse", release)
     value = embed.fields[-1].value
     assert value.count("build-") == embeds.MAX_ASSETS
     assert value.endswith("+25 more")
@@ -123,7 +123,7 @@ def test_release_without_notes_or_assets():
     release = load("release_published")["release"]
     release["body"] = None
     release["assets"] = []
-    embed = release_embed("saiyii/nuclear-resource", release)
+    embed = release_embed("saiyii/gitpulse", release)
     assert embed.description == "*No release notes.*"
     assert embed.fields[-1].name == "Source code"
 
