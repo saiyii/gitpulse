@@ -37,9 +37,24 @@ def read_env(name: str, default: str) -> str:
     return os.getenv(name, default)
 
 
+def resolve(ref: str) -> str:
+    """Branch name -> commit sha. Branch tarballs can be cached for a few minutes."""
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{REPO}/commits/{ref}",
+        headers={"Accept": "application/vnd.github.sha", "User-Agent": "GitPulse-start"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as resp:
+            return resp.read().decode().strip()
+    except OSError as exc:
+        print(f"[start] could not resolve {ref} ({exc}), using the branch", file=sys.stderr)
+        return f"refs/heads/{ref}"
+
+
 def update(ref: str) -> None:
-    url = f"https://codeload.github.com/{REPO}/tar.gz/refs/heads/{ref}"
-    print(f"[start] downloading {REPO}@{ref}", file=sys.stderr, flush=True)
+    target = resolve(ref)
+    url = f"https://codeload.github.com/{REPO}/tar.gz/{target}"
+    print(f"[start] downloading {REPO}@{ref} ({target[:7]})", file=sys.stderr, flush=True)
     with urllib.request.urlopen(url, timeout=30) as resp:
         data = resp.read()
 
