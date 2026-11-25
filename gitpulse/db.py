@@ -120,6 +120,19 @@ class Database:
         )
         await self.conn.commit()
 
+    async def clear_installation(self, installation_id: int) -> None:
+        await self.conn.execute(
+            "UPDATE subscriptions SET installation_id = NULL WHERE installation_id = ?",
+            (installation_id,),
+        )
+        await self.conn.commit()
+
+    async def clear_repo_installation(self, repo: str) -> None:
+        await self.conn.execute(
+            "UPDATE subscriptions SET installation_id = NULL WHERE repo = ?", (repo,)
+        )
+        await self.conn.commit()
+
     async def remove_channel(self, channel_id: int) -> None:
         await self.conn.execute("DELETE FROM subscriptions WHERE channel_id = ?", (channel_id,))
         await self.conn.commit()

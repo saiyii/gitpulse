@@ -29,6 +29,20 @@ _EVENT_TO_TYPE = {event: name for name, event in EVENT_TYPES.items()}
 INVITE_PERMISSIONS = discord.Permissions(view_channel=True, send_messages=True, embed_links=True)
 
 
+def log_marketplace_event(payload: dict[str, Any]) -> None:
+    """GitHub Marketplace plan changes. GitPulse only has a free plan, so just record them."""
+    purchase = payload.get("marketplace_purchase") or {}
+    account = purchase.get("account") or {}
+    plan = purchase.get("plan") or {}
+    log.info(
+        "marketplace: %s by %s %s, plan %r",
+        payload.get("action", "?"),
+        (account.get("type") or "account").lower(),
+        account.get("login", "?"),
+        plan.get("name"),
+    )
+
+
 class GitPulse(commands.Bot):
     session: aiohttp.ClientSession
     github: GitHubClient
@@ -120,6 +134,13 @@ class GitPulse(commands.Bot):
     # -- GitHub events --------------------------------------------------------
 
     async def handle_github_event(self, event: str, payload: dict[str, Any]) -> None:
+        if event == "marketplace_purchase":
+            log_marketplace_event(payload)
+            return
+        if event in ("installation", "installation_repositories"):
+            await self._handle_installation_change(event, payload)
+            return
+
         event_type = _EVENT_TO_TYPE.get(event)
         repo = (payload.get("repository") or {}).get("full_name")
         if event_type is None or repo is None:
@@ -141,6 +162,24 @@ class GitPulse(commands.Bot):
         if subscriptions:
             await self.wait_until_ready()
             await asyncio.gather(*(self._post(sub, embed) for sub in subscriptions))
+
+    async def _handle_installation_change(self, event: str, payload: dict[str, Any]) -> None:
+        installation_id: int = payload["installation"]["id"]
+        action = payload.get("action")
+        account = (payload["installation"].get("account") or {}).get("login", "?")
+
+        if event == "installation" and action == "deleted":
+            log.info("app uninstalled from %s (installation %s)", account, installation_id)
+            self.github.forget_installation(installation_id)
+            await self.db.clear_installation(installation_id)
+        elif event == "installation" and action == "created":
+            log.info("app installed on %s (installation %s)", account, installation_id)
+        elif event == "installation_repositories" and action == "removed":
+            repos = [r["full_name"] for r in payload.get("repositories_removed") or []]
+            log.info("installation %s lost access to %s", installation_id, ", ".join(repos))
+            for repo in repos:
+                self.github.forget_repo(repo)
+                await self.db.clear_repo_installation(repo)
 
     async def _post(self, sub: Subscription, embed: discord.Embed) -> None:
         channel = self.get_channel(sub.channel_id)

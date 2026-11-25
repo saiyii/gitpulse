@@ -138,6 +138,17 @@ class GitHubClient:
     def remember_installation(self, repo: str, installation_id: int) -> None:
         self._installations[repo.lower()] = (installation_id, time.monotonic() + _INSTALLATION_TTL)
 
+    def forget_repo(self, repo: str) -> None:
+        self._installations.pop(repo.lower(), None)
+
+    def forget_installation(self, installation_id: int) -> None:
+        self.auth.forget(installation_id)
+        for repo, (cached_id, _) in list(self._installations.items()):
+            if cached_id == installation_id:
+                del self._installations[repo]
+        if self._any_installation and self._any_installation[0] == installation_id:
+            self._any_installation = None
+
     async def _some_installation(self) -> int | None:
         if self._any_installation and self._any_installation[1] > time.monotonic():
             return self._any_installation[0]
