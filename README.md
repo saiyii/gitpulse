@@ -178,7 +178,8 @@ See [SECURITY.md](SECURITY.md) to report a vulnerability.
 ## Support
 
 Questions, bugs or feature requests: open an [issue](https://github.com/saiyii/gitpulse/issues)
-or email **support@saiyiidev.com**.
+or email **support@saiyiidev.com**. What changed between versions is in the
+[changelog](CHANGELOG.md).
 
 ## License
 
