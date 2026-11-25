@@ -60,6 +60,20 @@ def test_excerpt_strips_html_comments():
     assert excerpt("<!-- hidden -->\r\nvisible", 100) == "visible"
 
 
+def test_excerpt_strips_html_tags():
+    body = (
+        "Post a message when someone stars a repo.\n\n"
+        "<details><summary>Logs</summary>\n\nnothing\n</details>\n\n"
+        '<img src="x.png" width="200"/>\n'
+        "<sub>Opened from Discord by someone with [GitPulse](https://example.com)</sub>"
+    )
+    text = excerpt(body, 400)
+    assert "<" not in text
+    assert "Opened from Discord by someone with [GitPulse](https://example.com)" in text
+    # comparisons are not tags
+    assert excerpt("if a < b and c > d", 100) == "if a < b and c > d"
+
+
 def test_excerpt_closes_code_fence():
     text = "intro\n```py\n" + "print('x')\n" * 200 + "```"
     short = excerpt(text, 300, "https://example.com")

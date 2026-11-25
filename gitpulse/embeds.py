@@ -41,6 +41,7 @@ class Color:
 
 
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
+_HTML_TAG = re.compile(r"</?[A-Za-z][A-Za-z0-9-]*(?:\s[^<>]*)?/?>")
 
 
 def truncate(text: str, limit: int) -> str:
@@ -51,7 +52,9 @@ def truncate(text: str, limit: int) -> str:
 
 def excerpt(text: str | None, limit: int, read_more_url: str | None = None) -> str:
     """Shorten markdown for an embed, cutting on a line break when possible."""
-    text = _HTML_COMMENT.sub("", (text or "").replace("\r\n", "\n")).strip()
+    text = _HTML_COMMENT.sub("", (text or "").replace("\r\n", "\n"))
+    # GitHub renders inline HTML (<sub>, <details>, <img>...), Discord shows it as is
+    text = _HTML_TAG.sub("", text).strip()
     if len(text) <= limit:
         return text
 
