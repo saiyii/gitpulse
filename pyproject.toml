@@ -11,6 +11,10 @@ testpaths = ["tests"]
 pythonpath = ["."]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    # raised inside discord.utils on Python 3.13+, not our code
+    "ignore:'count' is passed as positional argument:DeprecationWarning",
+]
 
 [tool.ruff]
 line-length = 100
