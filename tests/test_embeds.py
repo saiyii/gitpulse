@@ -212,7 +212,9 @@ def test_issue_other_actions_ignored(action):
 
 def test_pull_request_merged():
     embed = build_embed("pull_request", load("pull_request_merged"))
-    assert embed.title == "[saiyii/gitpulse] Pull request merged: #14 Allow dots in repository names"
+    assert (
+        embed.title == "[saiyii/gitpulse] Pull request merged: #14 Allow dots in repository names"
+    )
     assert embed.color.value == Color.DONE
     fields = {f.name: f.value for f in embed.fields}
     assert fields["Branches"] == "`fix/repo-name-regex` → `main`"

@@ -248,9 +248,7 @@ def pull_request_embed(payload: dict[str, Any]) -> discord.Embed | None:
         verb, color = action, Color.OPEN
 
     embed = discord.Embed(
-        title=truncate(
-            f"[{repo}] Pull request {verb}: #{pr['number']} {pr['title']}", TITLE_LIMIT
-        ),
+        title=truncate(f"[{repo}] Pull request {verb}: #{pr['number']} {pr['title']}", TITLE_LIMIT),
         url=pr["html_url"],
         color=color,
         timestamp=_time(pr.get("merged_at") or pr.get("closed_at") or pr.get("updated_at")),

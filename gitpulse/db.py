@@ -108,9 +108,7 @@ class Database:
 
     async def subscribers(self, repo: str, event_type: str) -> list[Subscription]:
         """Channels subscribed to `repo` for the given event type (e.g. "releases")."""
-        async with self.conn.execute(
-            "SELECT * FROM subscriptions WHERE repo = ?", (repo,)
-        ) as cur:
+        async with self.conn.execute("SELECT * FROM subscriptions WHERE repo = ?", (repo,)) as cur:
             subs = [Subscription.from_row(row) async for row in cur]
         return [s for s in subs if event_type in s.events]
 
