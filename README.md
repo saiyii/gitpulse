@@ -36,15 +36,17 @@ copy, see [Self-hosting](#self-hosting).
 - **One process**: the bot and the webhook server share an asyncio loop, so it runs fine on
   a Pterodactyl Python egg or any box that can run `python main.py`.
 
-<!--
 ## Screenshots
 
-| Release | Push |
+The v1.0.0 release of this repository, announced in `#releases`:
+
+![Release announcement in Discord](docs/screenshots/release.png)
+
+| Pull request opened and merged | Pushes to the default branch |
 | --- | --- |
-| ![Release announcement](docs/screenshots/release.png) | ![Push summary](docs/screenshots/push.png) |
-| **Pull request** | **/repo** |
-| ![Merged pull request](docs/screenshots/pull-request.png) | ![/repo command](docs/screenshots/repo-command.png) |
--->
+| ![Pull request opened and merged](docs/screenshots/pull-request.png) | ![Push summary](docs/screenshots/push.png) |
+| **Issue opened from Discord with `/issue create`** | **`/repo`** |
+| ![Issue created from Discord](docs/screenshots/issue.png) | ![/repo command](docs/screenshots/repo-command.png) |
 
 ## Commands
 
