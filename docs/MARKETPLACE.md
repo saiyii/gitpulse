@@ -141,7 +141,7 @@ gitpulse.bot: marketplace: purchased by organization octo-org, plan 'Free'
 Back on the **Overview** page, accept the **GitHub Marketplace Developer Agreement** and click
 **Submit for review**. Someone from GitHub's Marketplace team gets in touch, sometimes with
 change requests. Once approved, the listing shows up at
-`https://github.com/marketplace/gitpulse`.
+`https://github.com/marketplace/<listing-name>`.
 
 Things that commonly get a listing sent back: broken links, a privacy policy that doesn't
 describe the actual data, screenshots with browser chrome, typos in the descriptions, or

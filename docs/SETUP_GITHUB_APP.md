@@ -170,7 +170,7 @@ SUPPORT_EMAIL=support@saiyiidev.com
 Start the bot with `python main.py`. In the logs you should see:
 
 ```
-gitpulse.bot: authenticated as GitHub App 'gitpulse'
+gitpulse.bot: authenticated as GitHub App 'gitpulse-discord'
 gitpulse.github.webhooks: webhook server listening on 0.0.0.0:8080
 gitpulse.bot: synced 8 global commands (can take a while to show up)
 gitpulse.bot: logged in as GitPulse#1234, in 1 servers
