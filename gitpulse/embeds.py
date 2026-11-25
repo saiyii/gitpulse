@@ -262,9 +262,11 @@ def pull_request_embed(payload: dict[str, Any]) -> discord.Embed | None:
     head, base = pr["head"]["ref"], pr["base"]["ref"]
     embed.add_field(name="Branches", value=f"`{head}` → `{base}`")
     if "additions" in pr:
+        files = pr["changed_files"]
+        files_text = f"{files} file{'s' if files != 1 else ''}"
         embed.add_field(
             name="Changes",
-            value=f"+{pr['additions']} / -{pr['deletions']} in {pr['changed_files']} files",
+            value=f"+{pr['additions']} / -{pr['deletions']} in {files_text}",
         )
     _set_author(embed, payload.get("sender"))
     return _finish(embed, repo)

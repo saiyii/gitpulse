@@ -234,6 +234,11 @@ def test_pull_request_merged():
     assert fields["Branches"] == "`fix/repo-name-regex` → `main`"
     assert fields["Changes"] == "+12 / -3 in 2 files"
 
+    payload = load("pull_request_merged")
+    payload["pull_request"]["changed_files"] = 1
+    fields = {f.name: f.value for f in build_embed("pull_request", payload).fields}
+    assert fields["Changes"] == "+12 / -3 in 1 file"
+
 
 def test_pull_request_closed_without_merge():
     payload = load("pull_request_merged")
