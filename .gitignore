@@ -1,0 +1,28 @@
+# secrets
+.env
+*.pem
+
+# local data
+*.db
+*.db-journal
+*.sqlite3
+
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+
+# environments
+.venv/
+venv/
+
+# editors / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
