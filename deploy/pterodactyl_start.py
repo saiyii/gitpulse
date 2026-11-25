@@ -39,7 +39,7 @@ def read_env(name: str, default: str) -> str:
 
 def update(ref: str) -> None:
     url = f"https://codeload.github.com/{REPO}/tar.gz/refs/heads/{ref}"
-    print(f"[start] downloading {REPO}@{ref}", flush=True)
+    print(f"[start] downloading {REPO}@{ref}", file=sys.stderr, flush=True)
     with urllib.request.urlopen(url, timeout=30) as resp:
         data = resp.read()
 
@@ -77,13 +77,17 @@ def main() -> None:
         except Exception as exc:
             if not (ROOT / "main.py").exists():
                 raise
-            print(f"[start] update failed ({exc}), starting the current version", flush=True)
+            print(
+                f"[start] update failed ({exc}), starting the current version",
+                file=sys.stderr,
+                flush=True,
+            )
 
     subprocess.run(
         [sys.executable, "-m", "pip", "install", "--no-cache-dir", "-q", "-r", "requirements.txt"],
         check=True,
     )
-    print("[start] starting GitPulse", flush=True)
+    print("[start] starting GitPulse", file=sys.stderr, flush=True)
     os.execv(sys.executable, [sys.executable, "main.py"])
 
 

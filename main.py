@@ -19,7 +19,6 @@ def setup_logging() -> None:
         level=level,
         format="%(asctime)s %(levelname)-7s %(name)s: %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
-        stream=sys.stdout,
     )
     # discord.py is very chatty at DEBUG level
     logging.getLogger("discord").setLevel(max(level, logging.INFO))
