@@ -39,7 +39,18 @@ little between egg versions, but you want:
 | Git repo address / `GIT_ADDRESS` (if your egg has it) | `https://github.com/saiyii/gitpulse` |
 | Auto update / `AUTO_UPDATE` | `1` if you want a `git pull` on every start |
 
-If your egg doesn't do git, upload the repository files with the file manager or SFTP.
+If your egg doesn't do git (the basic "Discord Bot (Python)" egg doesn't), use the start
+script instead of uploading the code yourself:
+
+1. Upload [`deploy/pterodactyl_start.py`](../deploy/pterodactyl_start.py) to the server
+   root as `start.py`.
+2. Set the egg's Python file (`PY_FILE`) to `start.py`.
+
+On every start it downloads the latest `main` branch from GitHub, replaces `main.py`,
+`requirements.txt` and the `gitpulse/` folder, installs the requirements and starts the bot.
+Updating is then just a restart. `.env`, the key and the database are left alone. Add
+`GITPULSE_AUTO_UPDATE=0` to `.env` to freeze the current version, or `GITPULSE_BRANCH=dev`
+to follow another branch.
 
 ## 3. Secrets
 
